@@ -159,7 +159,7 @@ console.log(product);
                     disabled={!product.available}
                   >
                       <a
-    href="https://wa.me/917405954946?text=Hello%20I%20want%20to%20chat"
+    href="https://wa.me/917705954946?text=Hello%20I%20want%20to%20chat"
     target="_blank"
     rel="noopener noreferrer"
   >

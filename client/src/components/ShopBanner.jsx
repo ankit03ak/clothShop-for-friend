@@ -19,7 +19,7 @@ const ShopBanner = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-10">
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full text-base font-semibold transition hover:bg-white/20 hover:scale-105">
               <FaPhoneAlt />
-              <span>7405954946</span>
+              <span>7705954946</span>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full text-base font-semibold transition hover:bg-white/20 hover:scale-105">
               <FaMapMarkerAlt />

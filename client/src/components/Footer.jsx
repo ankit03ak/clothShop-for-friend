@@ -13,11 +13,11 @@ const Footer = () => {
   </p>
   <p>
     Contact us:{" "}
-    <a href="tel:+917405954946"
+    <a href="tel:+917705954946"
      target="_blank"
     rel="noopener noreferrer"
      className="text-blue-400 hover:underline">
-      7405954946
+      7705954946
     </a>{" "}
     | Email:{" "}
     <a href="mailto:vijaykumar227262@gmail.com"

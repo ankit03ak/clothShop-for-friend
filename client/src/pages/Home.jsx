@@ -30,30 +30,31 @@ const Home = () => {
       <div className="max-w-4xl mx-auto px-8 py-2">
         <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-full shadow-xl backdrop-blur-sm p-0 md:p-4">
           <div className="text-center mb-4">
-            <h2 className="text-2xl md:text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
-              Shop by Category
-            </h2>
+<h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
+  Shop by Category
+</h2>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded"></div>
           </div>
           
           <div className="flex gap-3 md:gap-3 flex-wrap justify-center">
             {categories.map((cat, index) => (
               <button
-                key={cat}
-                onClick={() => navigate(`/category/${cat.toLowerCase()}`)}
-                className="group relative overflow-hidden px-3 py-2.5 bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 font-semibold"
-              >
-                {/* Hover animation overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
-                
-                {/* Category icon */}
-                <div className="absolute top-1 right-2 w-6 h-6 bg-white bg-opacity-20 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <span className="relative z-10">{cat}</span>
-              </button>
+  key={cat}
+  onClick={() => navigate(`/category/${cat.toLowerCase()}`)}
+  className="group relative overflow-hidden px-1 py-0 sm:px-3 sm:py-2 bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-sm sm:text-base sm:mt-[-2px]"
+>
+  {/* Hover animation overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  
+  {/* Shimmer effect */}
+  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
+  
+  {/* Category icon */}
+  <div className="absolute top-1 right-1 w-4 h-4 sm:w-4 sm:h-4 bg-white bg-opacity-20 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+  
+  <span className="relative z-10">{cat}</span>
+</button>
+
             ))}
           </div>
         </div>
