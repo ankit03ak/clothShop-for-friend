@@ -52,7 +52,7 @@ const AddProduct = () => {
       data.append('description', formData.description);
       data.append('available', true);
 
-      await axios.post('http://localhost:8080/api/products', data, {
+      await axios.post('https://fr-api-s2ue.onrender.com/api/products', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${user.token}`,

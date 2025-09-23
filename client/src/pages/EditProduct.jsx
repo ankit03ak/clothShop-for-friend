@@ -20,7 +20,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/products/${id}`);
+        const res = await axios.get(`https://fr-api-s2ue.onrender.com/api/products/${id}`);
         const data = res.data;
 
         setProduct({
@@ -48,7 +48,7 @@ const EditProduct = () => {
         description: product.description,
       };
 
-      await axios.put(`http://localhost:8080/api/products/${id}`, payload, {
+      await axios.put(`https://fr-api-s2ue.onrender.com/api/products/${id}`, payload, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },

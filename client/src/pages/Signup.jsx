@@ -15,7 +15,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/api/auth/register', { name, email, password });
+      const res = await axios.post('https://fr-api-s2ue.onrender.com/api/auth/register', { name, email, password });
       login(res.data);
       toast.success('Signup Successfully');
       navigate('/');

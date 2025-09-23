@@ -11,7 +11,7 @@ const CategoryProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/products`);
+        const res = await axios.get(`https://fr-api-s2ue.onrender.com/api/products`);
         // filter locally (frontend way)
         const filtered = res.data.filter(
           (p) => p.category.toLowerCase() === category.toLowerCase()

@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:8080/api/products'); 
+        const res = await axios.get('https://fr-api-s2ue.onrender.com/api/products'); 
         setProducts(res.data.slice(0, 3)); // show only 3 featured
       } catch (err) {
         console.error(err);

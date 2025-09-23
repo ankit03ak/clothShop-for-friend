@@ -36,7 +36,7 @@ useEffect(() => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/products');
+      const res = await axios.get('https://fr-api-s2ue.onrender.com/api/products');
       setProducts(res.data);
     } catch (err) {
       toast.error('Error fetching products');
@@ -46,14 +46,14 @@ useEffect(() => {
 
     useEffect(() => {
     // fetch total users
-    axios.get("http://localhost:8080/api/admin/users/count")
+    axios.get("https://fr-api-s2ue.onrender.com/api/admin/users/count")
       .then(res => setTotalUsers(res.data.totalUsers))
       .catch(err => console.error(err));
   }, []);
 
   const handleClickTotalUser = () => {
     if (!showList) {
-      axios.get("http://localhost:8080/api/admin/users/list")
+      axios.get("https://fr-api-s2ue.onrender.com/api/admin/users/list")
         .then(res => setUserList(res.data))
         .catch(err => console.error(err));
     }
@@ -67,7 +67,7 @@ const handleDelete = async (id) => {
       label: "Yes",
       onClick: async () => {
         try {
-          await axios.delete(`http://localhost:8080/api/products/${id}`, {
+          await axios.delete(`https://fr-api-s2ue.onrender.com/api/products/${id}`, {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },

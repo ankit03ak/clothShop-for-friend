@@ -10,7 +10,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/products/${id}`);
+        const res = await axios.get(`https://fr-api-s2ue.onrender.com/api/products/${id}`);
         setProduct(res.data);
       } catch (err) {
         console.error(err);
