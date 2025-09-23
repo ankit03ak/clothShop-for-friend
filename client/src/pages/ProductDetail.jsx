@@ -33,7 +33,7 @@ console.log(product);
       <div className="flex items-center justify-center min-h-[80vh]">
         <div className="text-center space-y-2">
           <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto"></div>
-          <p className="text-xl text-purple-300 font-medium">Loading amazing product...</p>
+          <p className="text-xl text-purple-300 font-medium">Loading amazing product.....</p>
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@ console.log(product);
                         </span>
                       ))
                     ) : (
-                      <span className="text-gray-700 italic">No sizes specified</span>
+                      <span className="text-gray-700 italic">No sizes specified </span>
                     )}
                   </div>
                 </div>
@@ -165,7 +165,7 @@ console.log(product);
   >
 
 
-                    {product.available ? 'Contact to BUY  :)' : 'Currently Unavailable'}
+                    {product.available ? 'Contact to BUY :)' : 'Currently Unavailable'}
   </a>
                   </button>
                   
