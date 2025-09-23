@@ -76,7 +76,7 @@ const Navbar = () => {
       <div className="relative z-10 flex flex-col items-center space-y-2">
   {/* Shop Name */}
   <h2 className="ml-6 text-5xl font-extrabold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent tracking-wide drop-shadow-lg">
-    Chauhan Vastralay
+    Chauhan Vastralaya
   </h2>
 
   <div className="flex flex-wrap items-center justify-center space-x-4 mt-2 text-center">

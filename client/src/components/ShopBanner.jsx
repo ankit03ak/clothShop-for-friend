@@ -12,7 +12,7 @@ const ShopBanner = () => {
           
           {/* Shop Name */}
           <h1 className="font-pacifico text-5xl md:text-7xl mb-3">
-            Chauhan Vastralay
+            Chauhan Vastralaya
           </h1>
 
           {/* Contact Details */}
@@ -68,3 +68,5 @@ const ShopBanner = () => {
 };
 
 export default ShopBanner;
+
+// THIS COMPONENT NOT USED ANYWHERE TILL NOW
