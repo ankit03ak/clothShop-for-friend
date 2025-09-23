@@ -12,14 +12,14 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(cors({
-  origin: ['https://live-cric-score.vercel.app', 'http://localhost:5173'],
+  origin: ['https://chauhan-vastralaya.vercel.app', 'http://localhost:5173'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
 
 const io = socketIo(server, {
   cors: {
-    origin: ['https://live-cric-score.vercel.app', 'http://localhost:5173'],
+    origin: ['https://chauhan-vastralaya.vercel.app', 'http://localhost:5173'],
     methods: ['GET', 'POST'],
     credentials: true
   }
