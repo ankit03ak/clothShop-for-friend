@@ -91,7 +91,7 @@ console.log(product);
                 {/* Price */}
                 <div className="flex items-center space-x-3">
                   <span className="text-purple-500 text-xl font-medium">Price:</span>
-                  <span className="text-3xl font-black bg-gradient-to-r text-green-600 bg-clip-text text-transparent">
+                  <span className="text-3xl font-black bg-gradient-to-r text-green-700 bg-clip-text text-transparent">
                     ₹{product.price}
                   </span>
                 </div>
@@ -165,7 +165,7 @@ console.log(product);
   >
 
 
-                    {product.available ? 'Contact to BUT  :)' : 'Currently Unavailable'}
+                    {product.available ? 'Contact to BUY  :)' : 'Currently Unavailable'}
   </a>
                   </button>
                   

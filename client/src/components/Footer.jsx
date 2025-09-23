@@ -2,7 +2,7 @@ import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-2 ">
+    <footer className="bg-gray-900 text-gray-300 py-3 text-[14px]">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
         
         {/* Left: Copyright */}
@@ -11,7 +11,7 @@ const Footer = () => {
           <p>
     &copy; {new Date().getFullYear()} Chauhan Ready Made Center. All rights reserved.
   </p>
-  <p>
+  <p className="text-[13px]">
     Contact us:{" "}
     <a href="tel:+917705954946"
      target="_blank"
@@ -44,7 +44,7 @@ const Footer = () => {
   </p>
         </div>
 
-        <div className="text-[14px] mt-2 md:mt-0 flex items-center gap-2">
+        <div className="text-[11px] mt-2 md:mt-0 flex items-center gap-2">
           <span>Designed and Developed by</span>
           <span className="text-purple-400 font-semibold">Storms :) </span>
           <a 
