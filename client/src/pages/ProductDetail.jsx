@@ -23,7 +23,7 @@ const ProductDetail = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }, [id]);
 
-console.log(product);
+// console.log(product);
 
 
 

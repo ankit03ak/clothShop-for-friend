@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'sonner';
@@ -10,6 +10,7 @@ const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
     const [activeUsers, setActiveUsers] = useState(0);
   const [totalVisitors, setTotalVisitors] = useState(0);
+  const navigate = useNavigate();
 
     const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -18,7 +19,10 @@ const Navbar = () => {
     toast.warning("Are you sure you want to logout?", {
       action: {
         label: "Yes",
-        onClick: () => logout(),
+          onClick: () => {
+          logout();      // clear session
+          navigate("/"); // redirect to home
+        },
       },
       cancel: {
       label: "No",
