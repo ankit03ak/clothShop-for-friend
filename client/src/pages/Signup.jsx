@@ -11,15 +11,20 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const res = await axios.post('https://fr-api-s2ue.onrender.com/api/auth/register', { name, email, password });
       login(res.data);
       toast.success('Signup Successfully');
       navigate('/');
     } catch (err) {
+      setLoading(false);
       console.error(err);
       toast.error('Signup failed');
     }
@@ -106,6 +111,7 @@ const Signup = () => {
       <button 
         type="submit" 
         className="group relative w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 overflow-hidden"
+        disabled={loading}
       >
         {/* Button background animation */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -114,7 +120,7 @@ const Signup = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
         
         <span className="relative z-10 flex items-center justify-center">
-          Create Account
+          {loading ? (<><div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3 "></div> Creating ...</>) : (<> Create Account</>)}
           <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>

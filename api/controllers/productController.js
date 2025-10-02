@@ -3,10 +3,6 @@ const Product = require("../models/Product");
 
 exports.addProduct = async (req, res) => {
   try {
-
-    // if (!req.file) {
-    //   return res.status(400).json({ msg: "No image file uploaded" });
-    // }
     let imageUrl = "add-url-here";
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path, {
