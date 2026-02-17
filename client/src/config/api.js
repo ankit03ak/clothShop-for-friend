@@ -2,15 +2,12 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://fr-api-s2ue.onrender.com/api';
 
 export const API_ENDPOINTS = {
-  // Products
   PRODUCTS: `${API_BASE_URL}/products`,
   PRODUCT_BY_ID: (id) => `${API_BASE_URL}/products/${id}`,
   
-  // Auth
   LOGIN: `${API_BASE_URL}/auth/login`,
   SIGNUP: `${API_BASE_URL}/auth/signup`,
   
-  // Admin
   ADMIN: `${API_BASE_URL}/admin`,
 };
 
