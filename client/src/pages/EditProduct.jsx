@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import Navbar from '../components/Navbar';
 import { toast } from "sonner";
+import { API_ENDPOINTS } from '../config/api';
 
 const EditProduct = () => {
   const { user } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`https://fr-api-s2ue.onrender.com/api/products/${id}`);
+        const res = await axios.get(API_ENDPOINTS.PRODUCT_BY_ID(id));
         const data = res.data;
 
         setProduct({
@@ -48,7 +49,7 @@ const EditProduct = () => {
         description: product.description,
       };
 
-      await axios.put(`https://fr-api-s2ue.onrender.com/api/products/${id}`, payload, {
+      await axios.put(API_ENDPOINTS.PRODUCT_BY_ID(id), payload, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },
@@ -63,66 +64,106 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5"></div>
-      
-      <div className="relative z-10 flex items-center justify-center px-4">
-        <div className="w-full max-w-md">
-          {/* Header */}
-          <div className="text-center mb-4">
-            <h2 className="mt-4 text-4xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
-              Edit Product
-            </h2>
-            <p className="text-purple-200/80">Update product information</p>
-          </div>
+      <div className="container-custom py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <button
+            onClick={() => navigate('/admin')}
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Dashboard
+          </button>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Edit Product
+          </h1>
+          <p className="text-gray-600">Update product information</p>
+        </div>
 
-          {/* Form Container */}
-          <div className="bg-white/10 backdrop-blur-lg rounded p-6 border border-white/20 shadow-2xl mb-30">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        {/* Form Container */}
+        <div className="max-w-2xl bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Product Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Product Name
+              </label>
               <input
                 type="text"
                 value={product.name}
                 onChange={(e) => setProduct({ ...product, name: e.target.value })}
-                placeholder="Product Name"
-                className="w-full bg-white/10 border border-white/20 rounded px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent backdrop-blur-sm transition-all duration-300"
+                placeholder="Enter product name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                required
               />
+            </div>
 
+            {/* Price */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Price (₹)
+              </label>
               <input
                 type="number"
                 value={product.price}
                 onChange={(e) => setProduct({ ...product, price: e.target.value })}
-                placeholder="Price"
-                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent backdrop-blur-sm transition-all duration-300"
+                placeholder="Enter price"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                required
               />
+            </div>
 
+            {/* Availability */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Availability Status
+              </label>
               <select
                 value={product.available}
                 onChange={(e) => setProduct({ ...product, available: e.target.value === "true" })}
-                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent backdrop-blur-sm transition-all duration-300"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
               >
-                <option value="true" className="bg-slate-800 text-white ">In Stock</option>
-                <option value="false" className="bg-slate-800 text-white">Out of Stock</option>
+                <option value="true">In Stock</option>
+                <option value="false">Out of Stock</option>
               </select>
+            </div>
 
+            {/* Description */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Product Description
+              </label>
               <textarea
                 value={product.description}
                 onChange={(e) => setProduct({ ...product, description: e.target.value })}
                 placeholder="Enter product description"
-                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent backdrop-blur-sm transition-all duration-300 resize-none"
-                rows="3"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
+                rows="4"
               />
+            </div>
 
+            {/* Action Buttons */}
+            <div className="flex gap-4 pt-4">
+              <button
+                type="button"
+                onClick={() => navigate('/admin')}
+                className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-2 rounded-xl shadow-lg hover:shadow-xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 border border-purple-400/20"
+                className="flex-1 px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
               >
                 Save Changes
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

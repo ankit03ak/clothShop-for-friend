@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import { FaUpload, FaImage, FaArrowLeft, FaSave } from 'react-icons/fa';
 import { toast } from 'sonner';
+import { API_ENDPOINTS } from '../config/api';
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
@@ -52,7 +53,7 @@ const AddProduct = () => {
       data.append('description', formData.description);
       data.append('available', true);
 
-      await axios.post('https://fr-api-s2ue.onrender.com/api/products', data, {
+      await axios.post(API_ENDPOINTS.PRODUCTS, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${user.token}`,
@@ -72,106 +73,195 @@ const AddProduct = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5"></div>
-      <div className="relative z-10 py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <button onClick={handleCancel} className="float-left bg-white/10 hover:bg-white/20 text-purple-200 p-3 rounded-full transition-all duration-300 hover:scale-110">
-              <FaArrowLeft />
-            </button>
-            <h1 className="text-4xl font-black bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent mb-4">
-              Add New Product
-            </h1>
-            <p className="text-purple-200/80 text-lg">Create a new product listing</p>
-          </div>
+      
+      <div className="container-custom py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <button
+            onClick={handleCancel}
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Dashboard
+          </button>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Add New Product
+          </h1>
+          <p className="text-gray-600">Create a new product listing</p>
+        </div>
 
-          {/* Form */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name */}
-              <div className="space-y-2">
-                <label className="text-purple-200 font-medium text-lg">🏷️ Product Name *</label>
-                <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Enter product name" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent backdrop-blur-sm transition-all duration-300" required />
+        {/* Form */}
+        <div className="max-w-3xl bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Product Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Product Name *
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Enter product name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                required
+              />
+            </div>
+
+            {/* Price and Category */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Price (₹) *
+                </label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  placeholder="Enter price"
+                  min="0"
+                  step="0.01"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                  required
+                />
               </div>
-
-              {/* Price */}
-              <div className="space-y-2">
-                <label className="text-purple-200 font-medium text-lg">💰 Price (₹) *</label>
-                <input type="number" name="price" value={formData.price} onChange={handleInputChange} placeholder="Enter price" min="0" step="0.01" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent backdrop-blur-sm transition-all duration-300" required />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Category *
+                </label>
+                <input
+                  type="text"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  placeholder="e.g., Saree, Shirt, Kurta"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                  required
+                />
               </div>
-              <div className="space-y-2">
-  <label className="text-purple-200 font-medium text-lg">
-    🏷️ Category *
-  </label>
-  <input
-    type="text"
-    name="category"
-    value={formData.category}
-    onChange={handleInputChange}
-    placeholder="Enter category"
-    required
-    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-  />
-</div>
+            </div>
 
-              {/* Image Upload */}
-              <div className="space-y-2">
-                <label className="text-purple-200 font-medium text-lg">📷 Product Image *</label>
-                <div className="flex flex-col gap-4">
-                  <div className="relative">
-                    <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="image-upload" required />
-                    <label htmlFor="image-upload" className="w-full bg-white/10 border-2 border-dashed border-white/30 rounded-xl p-8 text-center cursor-pointer hover:bg-white/20 transition-all duration-300 flex flex-col items-center gap-4">
-                      <FaUpload className="text-4xl text-purple-300" />
-                      <div>
-                        <p className="text-purple-200 font-medium">Click to upload image</p>
-                        <p className="text-purple-300/60 text-sm">PNG, JPG, JPEG up to 10MB</p>
-                      </div>
-                    </label>
+            {/* Image Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Product Image *
+              </label>
+              <div className="space-y-4">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                  id="image-upload"
+                  required
+                />
+                <label
+                  htmlFor="image-upload"
+                  className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg className="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <p className="text-sm text-gray-600 font-medium">Click to upload image</p>
+                    <p className="text-xs text-gray-500 mt-1">PNG, JPG, JPEG up to 10MB</p>
                   </div>
+                </label>
 
-                  {imagePreview && (
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <p className="text-purple-200 font-medium mb-3 flex items-center gap-2"><FaImage /> Preview</p>
-                      <img src={imagePreview} alt="Product preview" className="w-full h-64 object-cover rounded-lg shadow-lg" />
+                {imagePreview && (
+                  <div className="relative rounded-lg overflow-hidden border border-gray-200">
+                    <img src={imagePreview} alt="Product preview" className="w-full h-64 object-cover" />
+                    <div className="absolute top-2 right-2">
+                      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
+                        Image uploaded
+                      </span>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
+            </div>
 
-              {/* Sizes and Colors */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-purple-200 font-medium text-lg">📏 Available Sizes</label>
-                  <input type="text" name="sizes" value={formData.sizes} onChange={handleInputChange} placeholder="S, M, L, XL" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent backdrop-blur-sm transition-all duration-300" />
-                  <p className="text-purple-300/60 text-sm">Separate with commas</p>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-purple-200 font-medium text-lg">🎨 Available Colors</label>
-                  <input type="text" name="colors" value={formData.colors} onChange={handleInputChange} placeholder="Red, Blue, Green" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent backdrop-blur-sm transition-all duration-300" />
-                  <p className="text-purple-300/60 text-sm">Separate with commas</p>
-                </div>
+            {/* Sizes and Colors */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Available Sizes
+                </label>
+                <input
+                  type="text"
+                  name="sizes"
+                  value={formData.sizes}
+                  onChange={handleInputChange}
+                  placeholder="S, M, L, XL"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                />
+                <p className="text-xs text-gray-500 mt-1">Separate with commas</p>
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Available Colors
+                </label>
+                <input
+                  type="text"
+                  name="colors"
+                  value={formData.colors}
+                  onChange={handleInputChange}
+                  placeholder="Red, Blue, Green"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+                />
+                <p className="text-xs text-gray-500 mt-1">Separate with commas</p>
+              </div>
+            </div>
 
-              {/* Description */}
-              <div className="space-y-2">
-                <label className="text-purple-200 font-medium text-lg">📝 Product Description</label>
-                <textarea name="description" value={formData.description} onChange={handleInputChange} placeholder="Enter detailed product description" rows="5" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-purple-300/60 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent backdrop-blur-sm transition-all duration-300 resize-none" />
-              </div>
+            {/* Description */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Product Description
+              </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="Enter detailed product description"
+                rows="5"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none"
+              />
+            </div>
 
-              {/* Buttons */}
-              <div className="flex gap-4 pt-6">
-                <button type="button" onClick={handleCancel} className="flex-1 bg-white/10 hover:bg-white/20 text-purple-200 font-bold py-4 px-6 rounded-xl border border-white/20 transition-all duration-300 hover:scale-105 backdrop-blur-sm text-lg flex items-center justify-center gap-2" disabled={loading}>
-                  <FaArrowLeft /> Cancel
-                </button>
-                <button type="submit" className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-500/50 transition-all duration-300 hover:scale-105 border border-green-400/20 text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled={loading}>
-                  {loading ? (<><div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> Adding...</>) : (<><FaSave /> Add Product</>)}
-                </button>
-              </div>
-            </form>
-          </div>
+            {/* Buttons */}
+            <div className="flex gap-4 pt-4">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                disabled={loading}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="flex-1 px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    Adding...
+                  </>
+                ) : (
+                  <>
+                    <FaSave /> Add Product
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
