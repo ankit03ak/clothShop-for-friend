@@ -45,18 +45,24 @@ useEffect(() => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     // fetch total users
-    axios.get(`${API_ENDPOINTS.ADMIN}/users/count`)
+    axios.get(API_ENDPOINTS.ADMIN_USERS_COUNT)
       .then(res => setTotalUsers(res.data.totalUsers))
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error('Error fetching user count:', err);
+        toast.error('Failed to fetch user count');
+      });
   }, []);
 
   const handleClickTotalUser = () => {
     if (!showList) {
-      axios.get(`${API_ENDPOINTS.ADMIN}/users/list`)
+      axios.get(API_ENDPOINTS.ADMIN_USERS_LIST)
         .then(res => setUserList(res.data))
-        .catch(err => console.error(err));
+        .catch(err => {
+          console.error('Error fetching user list:', err);
+          toast.error('Failed to fetch user list');
+        });
     }
     setShowList(!showList);
   };
